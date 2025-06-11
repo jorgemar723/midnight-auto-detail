@@ -1,68 +1,116 @@
-<main class="booking">
-    <h2>Book Your Appointment</h2>
-    <form class="booking-form">
-      <div>
+<main class="booking-page">
+    <h1>Book Your Appointment</h1>
+    <form (ngSubmit)="submitForm()" #bookingForm="ngForm">
+      
+      <!-- Full Name -->
+      <div class="form-group">
         <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" placeholder="John Doe" required />
+        <input
+          id="name"
+          name="name"
+          type="text"
+          [(ngModel)]="name"
+          placeholder="John Doe"
+          required
+        />
       </div>
   
-      <div>
+      <!-- Email Address -->
+      <div class="form-group">
         <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" placeholder="john@example.com" required />
+        <input
+          id="email"
+          name="email"
+          type="email"
+          [(ngModel)]="email"
+          placeholder="john@example.com"
+          required
+        />
       </div>
   
-      <div>
+      <!-- Phone Number -->
+      <div class="form-group">
         <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890" required />
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          [(ngModel)]="phone"
+          placeholder="(123) 456-7890"
+          required
+        />
       </div>
   
-      <div>
+      <!-- Car Make -->
+      <div class="form-group">
         <label for="make">Car Make</label>
-        <select id="make" name="make" required>
+        <select
+          id="make"
+          name="make"
+          [(ngModel)]="selectedMake"
+          (change)="onMakeChange()"
+          required
+        >
           <option value="" disabled selected>Select Make</option>
-          <option value="Toyota">Toyota</option>
-          <option value="Honda">Honda</option>
-          <option value="Ford">Ford</option>
-          <option value="Chevrolet">Chevrolet</option>
-          <option value="Nissan">Nissan</option>
-          <!-- Add more as needed -->
+          <option *ngFor="let make of carMakes" [value]="make">{{ make }}</option>
         </select>
       </div>
   
-      <div>
+      <!-- Car Model -->
+      <div class="form-group">
         <label for="model">Car Model</label>
-        <input type="text" id="model" name="model" placeholder="Civic, Camry, F-150..." required />
-      </div>
-  
-      <div>
-        <label for="year">Car Year</label>
-        <select id="year" name="year" required>
-          <option value="" disabled selected>Select Year</option>
-          <!-- Generate years dynamically if needed -->
-          <script>
-            const select = document.currentScript.parentElement.querySelector('select');
-            const year = new Date().getFullYear();
-            for (let i = year; i >= 1980; i--) {
-              const option = document.createElement('option');
-              option.value = i;
-              option.textContent = i;
-              select.appendChild(option);
-            }
-          </script>
+        <select
+          id="model"
+          name="model"
+          [(ngModel)]="selectedModel"
+          [disabled]="!modelsForSelectedMake.length"
+          required
+        >
+          <option value="" disabled selected>Select Model</option>
+          <option *ngFor="let model of modelsForSelectedMake" [value]="model">{{ model }}</option>
         </select>
       </div>
   
-      <div>
+      <!-- Car Year -->
+      <div class="form-group">
+        <label for="year">Car Year</label>
+        <input
+          id="year"
+          name="year"
+          type="number"
+          [(ngModel)]="year"
+          placeholder="e.g., 2017"
+          required
+        />
+      </div>
+  
+      <!-- Car Color -->
+      <div class="form-group">
         <label for="color">Car Color</label>
-        <input type="text" id="color" name="color" placeholder="Black, Red, White..." required />
+        <input
+          id="color"
+          name="color"
+          type="text"
+          [(ngModel)]="color"
+          placeholder="Black, Red, White..."
+          required
+        />
       </div>
   
-      <div>
+      <!-- Notes (Optional) -->
+      <div class="form-group">
         <label for="notes">Additional Notes</label>
-        <textarea id="notes" name="notes" placeholder="Any special requests?"></textarea>
+        <textarea
+          id="notes"
+          name="notes"
+          [(ngModel)]="notes"
+          placeholder="Any special requests?"
+          rows="3"
+        ></textarea>
       </div>
   
-      <button type="submit">Submit Booking</button>
+      <!-- Submit Button -->
+      <button class="submit-button" type="submit" [disabled]="!isFormValid()">Submit Booking</button>
     </form>
   </main>
   
