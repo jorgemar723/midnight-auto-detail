@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-booking',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './booking.html',
   styleUrls: ['./booking.css']
 })
@@ -13,10 +17,11 @@ export class BookingComponent implements OnInit {
   selectedModel = '';
   year = '';
   color = '';
+  notes = '';
   carMakes: string[] = [];
   modelsForSelectedMake: string[] = [];
 
-  carData: { [make: string]: string[] } = {
+  carData: Record<string, string[]> = {
     Ford: ['F-150', 'Explorer', 'Mustang'],
     Honda: ['Civic', 'Accord', 'CR-V'],
     Toyota: ['Camry', 'Corolla', 'RAV4'],
@@ -34,13 +39,13 @@ export class BookingComponent implements OnInit {
 
   isFormValid(): boolean {
     return (
-      !!this.name &&
-      !!this.email &&
-      !!this.phone &&
-      !!this.selectedMake &&
-      !!this.selectedModel &&
-      !!this.year &&
-      !!this.color
+      this.name.trim() !== '' &&
+      this.email.trim() !== '' &&
+      this.phone.trim() !== '' &&
+      this.selectedMake.trim() !== '' &&
+      this.selectedModel.trim() !== '' &&
+      this.year.trim() !== '' &&
+      this.color.trim() !== ''
     );
   }
 
