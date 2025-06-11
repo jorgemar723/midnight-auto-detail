@@ -28,7 +28,8 @@
             "outputMode": "server",
             "ssr": {
               "entry": "src/server.ts"
-            }
+            },
+            "allowedCommonJsDependencies": ["zone.js"]
           },
           "configurations": {
             "production": {
