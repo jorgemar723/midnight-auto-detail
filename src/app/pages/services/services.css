@@ -1,30 +1,119 @@
 .services-page {
-    padding: 2rem;
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.service-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.service-card {
+  background: #1c1c1c;
+  color: #fff;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  width: 250px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.service-card:hover {
+  background-color: #2a2a2a;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.tap-note {
+  font-size: 0.85rem;
+  color: #bbb;
+  margin-top: 0.25rem;
+}
+
+.details {
+  margin-top: 1rem;
+  text-align: left;
+  animation: expand 0.25s ease-in-out;
+}
+
+.details ul {
+  padding-left: 1.2rem;
+  text-align: left;
+}
+
+.details li {
+  margin-bottom: 0.4rem;
+}
+
+.note {
+  margin-top: 2rem;
+  font-style: italic;
+  color: #999;
+}
+
+@keyframes expand {
+  from {
+    opacity: 0;
+    transform: scaleY(0.95);
   }
-  
-  .service-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 2rem;
+  to {
+    opacity: 1;
+    transform: scaleY(1);
   }
-  
-  .service-card {
-    background: #1c1c1c;
-    color: #fff;
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    width: 250px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  }
-  
-  .note {
-    margin-top: 2rem;
-    font-style: italic;
-    color: #999;
-  }
-  
+}
+
+
+.vehicle-selector {
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.vehicle-selector label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.vehicle-selector select {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+}
+
+.addon-section {
+  background-color: #2a2a2a;
+  color: #fff;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.addon-section h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.addon-checkbox {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}

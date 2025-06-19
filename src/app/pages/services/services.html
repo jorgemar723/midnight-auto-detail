@@ -1,26 +1,93 @@
 <section class="services-page">
-    <h1>Our Services</h1>
-    <p>We offer a full range of professional car detailing services tailored to your needs.</p>
-  
-    <div class="service-list">
-      <div class="service-card">
-        <h3>Exterior Wash & Wax</h3>
-        <p>Thorough hand wash, wax, and polish for a brilliant shine.</p>
+  <h1>Our Services</h1>
+  <p>We offer a full range of professional car detailing services tailored to your needs.</p>
+
+  <!-- Vehicle Type Selector -->
+  <div class="vehicle-selector">
+    <label for="vehicleType">Select your vehicle type:</label>
+    <select id="vehicleType" [(ngModel)]="selectedVehicleType">
+      <option value="car">Car / Crossover</option>
+      <option value="smallSUV">Small SUV / Truck</option>
+      <option value="largeSUV">Large SUV / Truck</option>
+    </select>
+  </div>
+
+  <!-- Service List -->
+  <div class="service-list">
+    <!-- Exterior Wash -->
+    <div class="service-card" (click)="toggleService('exterior')">
+      <div class="card-header">
+        <h3>Exterior Wash</h3>
+        <span class="toggle-icon">{{ showExterior ? '−' : '+' }}</span>
       </div>
-      <div class="service-card">
-        <h3>Interior Detailing</h3>
-        <p>Deep cleaning of carpets, seats, and all interior surfaces.</p>
-      </div>
-      <div class="service-card">
-        <h3>Full Detail Package</h3>
-        <p>Includes both exterior and interior detailing with premium add-ons.</p>
-      </div>
-      <div class="service-card">
-        <h3>Engine Bay Cleaning</h3>
-        <p>Carefully remove grime and dirt from your engine area for improved presentation.</p>
+      <p class="tap-note">Tap to view details</p>
+      <div class="details" *ngIf="showExterior">
+        <ul>
+          <li>Exterior Hand Wash & Dry</li>
+          <li>Tire and Rim Clean</li>
+          <li>Bug Removal</li>
+          <li>Tire Shine</li>
+        </ul>
+        <p><strong>Duration:</strong> {{ getDuration('exterior') }}</p>
+        <p><strong>Price:</strong> ${{ getPrice('exterior') }}</p>
       </div>
     </div>
-  
-    <p class="note">*Custom packages available upon request</p>
-  </section>
-  
+
+    <!-- Interior Detailing -->
+    <div class="service-card" (click)="toggleService('interior')">
+      <div class="card-header">
+        <h3>Interior Detailing</h3>
+        <span class="toggle-icon">{{ showInterior ? '−' : '+' }}</span>
+      </div>
+      <p class="tap-note">Tap to view details</p>
+      <div class="details" *ngIf="showInterior">
+        <ul>
+          <li>Deep cleaning of carpets, seats, and all interior surfaces</li>
+          <li>Dashboard, doors, and console wipedown</li>
+          <li>Vacuuming and optional shampoo</li>
+        </ul>
+        <p><strong>Duration:</strong> {{ getDuration('interior') }}</p>
+        <p><strong>Price:</strong> ${{ getPrice('interior') }}</p>
+      </div>
+    </div>
+
+    <!-- Full Detail Package -->
+    <div class="service-card" (click)="toggleService('fullDetail')">
+      <div class="card-header">
+        <h3>Full Detail Package</h3>
+        <span class="toggle-icon">{{ showFullDetail ? '−' : '+' }}</span>
+      </div>
+      <p class="tap-note">Tap to view details</p>
+      <div class="details" *ngIf="showFullDetail">
+        <ul>
+          <li>Exterior Wash</li>
+          <li>Interior Detailing</li>
+          <li>Tire Shine and Rim Detail</li>
+          <li>Optional Air Freshener</li>
+        </ul>
+        <p><strong>Duration:</strong> {{ getDuration('fullDetail') }}</p>
+        <p><strong>Price:</strong> ${{ getPrice('fullDetail') }}</p>
+      </div>
+    </div>
+  </div>
+
+<!-- Optional Add-On Services -->
+<div class="addon-section">
+  <h2>Optional Add-On Services</h2>
+  <div class="addon-checkbox">
+    <label>
+      <input type="checkbox" [(ngModel)]="selectedAddOns['petHair']" />
+      Pet Hair Removal (+$20)
+    </label>
+  </div>
+  <div class="addon-checkbox">
+    <label>
+      <input type="checkbox" [(ngModel)]="selectedAddOns['stainExtractor']" />
+      Stain Extractor Treatment (+$25)
+    </label>
+  </div>
+</div>
+
+
+  <p class="note">*Custom packages available upon request</p>
+</section>

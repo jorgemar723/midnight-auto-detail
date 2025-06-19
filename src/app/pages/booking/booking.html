@@ -1,116 +1,30 @@
-<main class="booking-page">
-    <h1>Book Your Appointment</h1>
-    <form (ngSubmit)="submitForm()" #bookingForm="ngForm">
-      
-      <!-- Full Name -->
-      <div class="form-group">
-        <label for="name">Full Name</label>
-        <input
-          id="name"
-          name="name"
-          type="text"
-          [(ngModel)]="name"
-          placeholder="John Doe"
-          required
-        />
-      </div>
-  
-      <!-- Email Address -->
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          [(ngModel)]="email"
-          placeholder="john@example.com"
-          required
-        />
-      </div>
-  
-      <!-- Phone Number -->
-      <div class="form-group">
-        <label for="phone">Phone Number</label>
-        <input
-          id="phone"
-          name="phone"
-          type="tel"
-          [(ngModel)]="phone"
-          placeholder="(123) 456-7890"
-          required
-        />
-      </div>
-  
-      <!-- Car Make -->
-      <div class="form-group">
-        <label for="make">Car Make</label>
-        <select
-          id="make"
-          name="make"
-          [(ngModel)]="selectedMake"
-          (change)="onMakeChange()"
-          required
-        >
-          <option value="" disabled selected>Select Make</option>
-          <option *ngFor="let make of carMakes" [value]="make">{{ make }}</option>
-        </select>
-      </div>
-  
-      <!-- Car Model -->
-      <div class="form-group">
-        <label for="model">Car Model</label>
-        <select
-          id="model"
-          name="model"
-          [(ngModel)]="selectedModel"
-          [disabled]="!modelsForSelectedMake.length"
-          required
-        >
-          <option value="" disabled selected>Select Model</option>
-          <option *ngFor="let model of modelsForSelectedMake" [value]="model">{{ model }}</option>
-        </select>
-      </div>
-  
-      <!-- Car Year -->
-      <div class="form-group">
-        <label for="year">Car Year</label>
-        <input
-          id="year"
-          name="year"
-          type="number"
-          [(ngModel)]="year"
-          placeholder="e.g., 2017"
-          required
-        />
-      </div>
-  
-      <!-- Car Color -->
-      <div class="form-group">
-        <label for="color">Car Color</label>
-        <input
-          id="color"
-          name="color"
-          type="text"
-          [(ngModel)]="color"
-          placeholder="Black, Red, White..."
-          required
-        />
-      </div>
-  
-      <!-- Notes (Optional) -->
-      <div class="form-group">
-        <label for="notes">Additional Notes</label>
-        <textarea
-          id="notes"
-          name="notes"
-          [(ngModel)]="notes"
-          placeholder="Any special requests?"
-          rows="3"
-        ></textarea>
-      </div>
-  
-      <!-- Submit Button -->
-      <button class="submit-button" type="submit" [disabled]="!isFormValid()">Submit Booking</button>
-    </form>
-  </main>
-  
+<main class="booking">
+  <h2>Book Your Appointment</h2>
+  <form #bookingForm="ngForm" (ngSubmit)="submitForm()">
+    <label>Full Name</label>
+    <input type="text" placeholder="John Doe" [(ngModel)]="name" name="name" required />
+
+    <label>Email Address</label>
+    <input type="email" placeholder="john@example.com" [(ngModel)]="email" name="email" required />
+
+    <label>Phone Number</label>
+    <input type="tel" placeholder="(123) 456-7890" [(ngModel)]="phone" name="phone" required />
+
+    <label>Car Make</label>
+    <input type="text" placeholder="e.g., Ford" [(ngModel)]="make" name="make" required />
+
+    <label>Car Model</label>
+    <input type="text" placeholder="e.g., Explorer" [(ngModel)]="model" name="model" required />
+
+    <label>Car Year</label>
+    <input type="text" placeholder="e.g., 2017" [(ngModel)]="year" name="year" required />
+
+    <label>Car Color</label>
+    <input type="text" placeholder="Black, Red, White..." [(ngModel)]="color" name="color" required />
+
+    <label>Additional Notes</label>
+    <textarea placeholder="Any special requests?" [(ngModel)]="notes" name="notes"></textarea>
+
+    <button class="cta-button" type="submit" [disabled]="!isFormValid()">Submit Booking</button>
+  </form>
+</main>

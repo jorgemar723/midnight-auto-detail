@@ -13,52 +13,37 @@ export class BookingComponent implements OnInit {
   name = '';
   email = '';
   phone = '';
-  selectedMake = '';
-  selectedModel = '';
+  make = '';
+  model = '';
   year = '';
   color = '';
   notes = '';
-  carMakes: string[] = [];
-  modelsForSelectedMake: string[] = [];
 
-  carData: Record<string, string[]> = {
-    Ford: ['F-150', 'Explorer', 'Mustang'],
-    Honda: ['Civic', 'Accord', 'CR-V'],
-    Toyota: ['Camry', 'Corolla', 'RAV4'],
-    Chevrolet: ['Silverado', 'Malibu', 'Tahoe']
-  };
-
-  ngOnInit() {
-    this.carMakes = Object.keys(this.carData);
-  }
-
-  onMakeChange() {
-    this.modelsForSelectedMake = this.carData[this.selectedMake] || [];
-    this.selectedModel = ''; // Reset model selection
-  }
+  ngOnInit(): void {}
 
   isFormValid(): boolean {
     return (
       this.name.trim() !== '' &&
       this.email.trim() !== '' &&
       this.phone.trim() !== '' &&
-      this.selectedMake.trim() !== '' &&
-      this.selectedModel.trim() !== '' &&
+      this.make.trim() !== '' &&
+      this.model.trim() !== '' &&
       this.year.trim() !== '' &&
       this.color.trim() !== ''
     );
   }
 
-  submitForm() {
+  submitForm(): void {
     if (this.isFormValid()) {
       console.log('Booking submitted:', {
         name: this.name,
         email: this.email,
         phone: this.phone,
-        make: this.selectedMake,
-        model: this.selectedModel,
+        make: this.make,
+        model: this.model,
         year: this.year,
-        color: this.color
+        color: this.color,
+        notes: this.notes
       });
       alert('Booking submitted!');
     }
