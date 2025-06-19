@@ -18,10 +18,10 @@
     <div class="service-card" (click)="toggleService('exterior')">
       <div class="card-header">
         <h3>Exterior Wash</h3>
-        <span class="toggle-icon">{{ showExterior ? '−' : '+' }}</span>
+        <span class="toggle-icon">{{ selectedService === 'exterior' ? '✓' : '+' }}</span>
       </div>
-      <p class="tap-note">Tap to view details</p>
-      <div class="details" *ngIf="showExterior">
+      <p class="tap-note">Tap to select</p>
+      <div class="details" *ngIf="selectedService === 'exterior'">
         <ul>
           <li>Exterior Hand Wash & Dry</li>
           <li>Tire and Rim Clean</li>
@@ -37,10 +37,10 @@
     <div class="service-card" (click)="toggleService('interior')">
       <div class="card-header">
         <h3>Interior Detailing</h3>
-        <span class="toggle-icon">{{ showInterior ? '−' : '+' }}</span>
+        <span class="toggle-icon">{{ selectedService === 'interior' ? '✓' : '+' }}</span>
       </div>
-      <p class="tap-note">Tap to view details</p>
-      <div class="details" *ngIf="showInterior">
+      <p class="tap-note">Tap to select</p>
+      <div class="details" *ngIf="selectedService === 'interior'">
         <ul>
           <li>Deep cleaning of carpets, seats, and all interior surfaces</li>
           <li>Dashboard, doors, and console wipedown</li>
@@ -55,10 +55,10 @@
     <div class="service-card" (click)="toggleService('fullDetail')">
       <div class="card-header">
         <h3>Full Detail Package</h3>
-        <span class="toggle-icon">{{ showFullDetail ? '−' : '+' }}</span>
+        <span class="toggle-icon">{{ selectedService === 'fullDetail' ? '✓' : '+' }}</span>
       </div>
-      <p class="tap-note">Tap to view details</p>
-      <div class="details" *ngIf="showFullDetail">
+      <p class="tap-note">Tap to select</p>
+      <div class="details" *ngIf="selectedService === 'fullDetail'">
         <ul>
           <li>Exterior Wash</li>
           <li>Interior Detailing</li>
@@ -71,23 +71,39 @@
     </div>
   </div>
 
-<!-- Optional Add-On Services -->
-<div class="addon-section">
-  <h2>Optional Add-On Services</h2>
-  <div class="addon-checkbox">
-    <label>
-      <input type="checkbox" [(ngModel)]="selectedAddOns['petHair']" />
-      Pet Hair Removal (+$20)
-    </label>
+  <!-- Optional Add-On Services -->
+  <div class="addon-section">
+    <h2>Optional Add-On Services</h2>
+    <div class="addon-checkbox">
+      <label>
+        <input type="checkbox" [(ngModel)]="selectedAddOns['petHair']" />
+        Pet Hair Removal (+$20)
+      </label>
+    </div>
+    <div class="addon-checkbox">
+      <label>
+        <input type="checkbox" [(ngModel)]="selectedAddOns['stainExtractor']" />
+        Stain Extractor Treatment (+$25)
+      </label>
+    </div>
   </div>
-  <div class="addon-checkbox">
-    <label>
-      <input type="checkbox" [(ngModel)]="selectedAddOns['stainExtractor']" />
-      Stain Extractor Treatment (+$25)
-    </label>
-  </div>
-</div>
 
+  <!-- Cart Summary -->
+  <div class="cart-summary" *ngIf="selectedService">
+    <h2>Cart Summary</h2>
+    <p><strong>Service:</strong> {{ selectedService | titlecase }} – ${{ getServiceTotal() }}</p>
+
+    <div *ngIf="selectedAddOns['petHair']">
+      <p>+ Pet Hair Removal: $20</p>
+    </div>
+    <div *ngIf="selectedAddOns['stainExtractor']">
+      <p>+ Stain Extractor Treatment: $25</p>
+    </div>
+
+    <p class="total-line"><strong>Total: ${{ getCartTotal() }}</strong></p>
+
+    <button class="checkout-btn">Continue to Booking</button>
+  </div>
 
   <p class="note">*Custom packages available upon request</p>
 </section>

@@ -1,9 +1,9 @@
-<nav class="navbar">
-  <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Home</a> |
-  <a routerLink="/about" routerLinkActive="active-link">About</a> |
-  <a routerLink="/services" routerLinkActive="active-link">Services</a> |
-  <a routerLink="/gallery" routerLinkActive="active-link">Gallery</a> |
-  <a routerLink="/contact" routerLinkActive="active-link">Contact</a>
+<nav class="navbar" [class.scrolled]="scrolled">
+  <a routerLink="/">Home</a> |
+  <a routerLink="/about">About</a> |
+  <a routerLink="/services">Services</a> |
+  <a routerLink="/gallery">Gallery</a> |
+  <a routerLink="/contact">Contact</a>
 </nav>
 
 <router-outlet></router-outlet>

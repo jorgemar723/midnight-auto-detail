@@ -1,11 +1,15 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterModule],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
-export class AppComponent { }
+export class AppComponent {
+  scrolled = false;
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.scrolled = window.scrollY > 50;
+  }
+}

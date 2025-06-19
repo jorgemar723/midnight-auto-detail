@@ -20,10 +20,8 @@ interface ServicePricing {
   styleUrls: ['./services.css']
 })
 export class ServicesComponent {
-  showExterior = false;
-  showInterior = false;
-  showFullDetail = false;
   selectedVehicleType: VehicleType = 'car';
+  selectedService: ServiceKey | null = null;
 
   selectedAddOns: { [key: string]: boolean } = {
     petHair: false,
@@ -52,13 +50,7 @@ export class ServicesComponent {
   };
 
   toggleService(service: ServiceKey): void {
-    if (service === 'exterior') {
-      this.showExterior = !this.showExterior;
-    } else if (service === 'interior') {
-      this.showInterior = !this.showInterior;
-    } else if (service === 'fullDetail') {
-      this.showFullDetail = !this.showFullDetail;
-    }
+    this.selectedService = this.selectedService === service ? null : service;
   }
 
   getPrice(service: ServiceKey): number {
@@ -69,7 +61,18 @@ export class ServicesComponent {
     return this.pricing[service].duration;
   }
 
-  toggleAddOn(key: string): void {
-    this.selectedAddOns[key] = !this.selectedAddOns[key];
+  getAddOnTotal(): number {
+    let total = 0;
+    if (this.selectedAddOns['petHair']) total += 20;
+    if (this.selectedAddOns['stainExtractor']) total += 25;
+    return total;
+  }
+
+  getServiceTotal(): number {
+    return this.selectedService ? this.getPrice(this.selectedService) : 0;
+  }
+
+  getCartTotal(): number {
+    return this.getServiceTotal() + this.getAddOnTotal();
   }
 }
