@@ -91,13 +91,13 @@
   <!-- Cart Summary -->
   <div class="cart-summary" *ngIf="selectedService">
     <h2>Cart Summary</h2>
-    <p><strong>Service:</strong> {{ selectedService | titlecase }} – ${{ getServiceTotal() }}</p>
+    <p><strong>Service:</strong> {{ serviceNames[selectedService] }} – ${{ getServiceTotal() }}</p>
 
     <div *ngIf="selectedAddOns['petHair']">
-      <p>+ Pet Hair Removal: $20</p>
+      <p>+ {{ addOnNames['petHair'] }}: $20</p>
     </div>
     <div *ngIf="selectedAddOns['stainExtractor']">
-      <p>+ Stain Extractor Treatment: $25</p>
+      <p>+ {{ addOnNames['stainExtractor'] }}: $25</p>
     </div>
 
     <p class="total-line"><strong>Total: ${{ getCartTotal() }}</strong></p>

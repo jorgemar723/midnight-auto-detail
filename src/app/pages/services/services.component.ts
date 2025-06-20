@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CartService, CartData, VehicleType as CartVehicleType } from '../../cart.service';
+import { CartService, CartData, VehicleType as CartVehicleType, SERVICE_LABELS, VEHICLE_TYPE_LABELS, AddOnKey, ADD_ON_LABELS } from '../../cart.service';
 
 type VehicleType = 'car' | 'smallSUV' | 'largeSUV'; // internal only
 type ServiceKey = 'exterior' | 'interior' | 'fullDetail';
@@ -25,7 +25,7 @@ export class ServicesComponent {
   selectedVehicleType: VehicleType = 'car';
   selectedService: ServiceKey | null = null;
 
-  selectedAddOns: { [key: string]: boolean } = {
+  selectedAddOns: Record<AddOnKey, boolean> = {
     petHair: false,
     stainExtractor: false
   };
@@ -35,6 +35,10 @@ export class ServicesComponent {
     smallSUV: 'smallSUV',
     largeSUV: 'largeSUV'
   };
+
+  displayVehicleNames = VEHICLE_TYPE_LABELS;
+  serviceNames = SERVICE_LABELS;
+  addOnNames = ADD_ON_LABELS;
 
   pricing: Record<ServiceKey, ServicePricing> = {
     exterior: {
@@ -87,7 +91,8 @@ export class ServicesComponent {
   }
 
   continueToBooking(): void {
-    const addOns = Object.keys(this.selectedAddOns).filter(key => this.selectedAddOns[key]);
+    const addOns = (Object.keys(this.selectedAddOns) as AddOnKey[])
+      .filter(key => this.selectedAddOns[key]);
     const cart: CartData = {
       vehicleType: this.vehicleTypeLabels[this.selectedVehicleType],
       service: this.selectedService,
