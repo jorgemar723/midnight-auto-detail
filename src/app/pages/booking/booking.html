@@ -1,38 +1,90 @@
 <main class="booking">
   <h2>Book Your Appointment</h2>
+
   <div *ngIf="cart" class="cart-summary">
     <h3>Your Selection</h3>
     <p><strong>Vehicle:</strong> {{ cart.vehicleType }}</p>
-    <p *ngIf="cart.service"><strong>Service:</strong> {{ cart.service | titlecase }} - ${{ cart.total }}</p>
+    <p *ngIf="cart.service">
+      <strong>Service:</strong> {{ cart.service | titlecase }} – ${{ cart.total }}
+    </p>
     <div *ngIf="cart.addOns.length">
       <p *ngFor="let add of cart.addOns">+ {{ add }}</p>
     </div>
   </div>
+
   <form #bookingForm="ngForm" (ngSubmit)="submitForm()">
     <label>Full Name</label>
-    <input type="text" placeholder="John Doe" [(ngModel)]="name" name="name" required />
+    <input
+      type="text"
+      placeholder="John Doe"
+      [(ngModel)]="name"
+      name="name"
+      required
+    />
 
     <label>Email Address</label>
-    <input type="email" placeholder="john@example.com" [(ngModel)]="email" name="email" required />
+    <input
+      type="email"
+      placeholder="john@example.com"
+      [(ngModel)]="email"
+      name="email"
+      required
+    />
 
     <label>Phone Number</label>
-    <input type="tel" placeholder="(123) 456-7890" [(ngModel)]="phone" name="phone" required />
+    <input
+      type="tel"
+      placeholder="(123) 456-7890"
+      [(ngModel)]="phone"
+      name="phone"
+      required
+    />
 
     <label>Car Make</label>
-    <input type="text" placeholder="e.g., Ford" [(ngModel)]="make" name="make" required />
+    <input
+      type="text"
+      placeholder="e.g., Ford"
+      [(ngModel)]="make"
+      name="make"
+      required
+    />
 
     <label>Car Model</label>
-    <input type="text" placeholder="e.g., Explorer" [(ngModel)]="model" name="model" required />
+    <input
+      type="text"
+      placeholder="e.g., Explorer"
+      [(ngModel)]="model"
+      name="model"
+      required
+    />
 
     <label>Car Year</label>
-    <input type="text" placeholder="e.g., 2017" [(ngModel)]="year" name="year" required />
+    <input
+      type="text"
+      placeholder="e.g., 2017"
+      [(ngModel)]="year"
+      name="year"
+      required
+    />
 
     <label>Car Color</label>
-    <input type="text" placeholder="Black, Red, White..." [(ngModel)]="color" name="color" required />
+    <input
+      type="text"
+      placeholder="Black, Red, White..."
+      [(ngModel)]="color"
+      name="color"
+      required
+    />
 
     <label>Additional Notes</label>
-    <textarea placeholder="Any special requests?" [(ngModel)]="notes" name="notes"></textarea>
+    <textarea
+      placeholder="Any special requests?"
+      [(ngModel)]="notes"
+      name="notes"
+    ></textarea>
 
-    <button class="cta-button" type="submit" [disabled]="!isFormValid()">Submit Booking</button>
+    <button class="cta-button" type="submit" [disabled]="!isFormValid()">
+      Submit Booking
+    </button>
   </form>
 </main>

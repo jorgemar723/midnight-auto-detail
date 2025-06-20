@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CartService, CartData, VehicleType as CartVehicleType } from '../../cart.service';
 
-type VehicleType = 'car' | 'smallSUV' | 'largeSUV';
+type VehicleType = 'car' | 'smallSUV' | 'largeSUV'; // internal only
 type ServiceKey = 'exterior' | 'interior' | 'fullDetail';
 
 interface ServicePricing {
@@ -29,7 +30,11 @@ export class ServicesComponent {
     stainExtractor: false
   };
 
-  constructor(private router: Router) {}
+  vehicleTypeLabels: { [key in VehicleType]: CartVehicleType } = {
+    car: 'car',
+    smallSUV: 'smallSUV',
+    largeSUV: 'largeSUV'
+  };
 
   pricing: Record<ServiceKey, ServicePricing> = {
     exterior: {
@@ -51,6 +56,8 @@ export class ServicesComponent {
       largeSUV: 180
     }
   };
+
+  constructor(private router: Router, private cartService: CartService) {}
 
   toggleService(service: ServiceKey): void {
     this.selectedService = this.selectedService === service ? null : service;
@@ -77,5 +84,17 @@ export class ServicesComponent {
 
   getCartTotal(): number {
     return this.getServiceTotal() + this.getAddOnTotal();
+  }
+
+  continueToBooking(): void {
+    const addOns = Object.keys(this.selectedAddOns).filter(key => this.selectedAddOns[key]);
+    const cart: CartData = {
+      vehicleType: this.vehicleTypeLabels[this.selectedVehicleType],
+      service: this.selectedService,
+      addOns,
+      total: this.getCartTotal()
+    };
+    this.cartService.setCart(cart);
+    this.router.navigate(['/booking']);
   }
 }
