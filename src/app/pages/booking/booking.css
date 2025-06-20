@@ -76,3 +76,22 @@ button[disabled] {
   background-color: #666;
   cursor: not-allowed;
 }
+
+/* Cart summary styling */
+.cart-summary {
+  background-color: #1e1e1e;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  margin-bottom: 2rem;
+}
+
+.cart-summary h3 {
+  margin-top: 0;
+  color: #00bcd4;
+  margin-bottom: 1rem;
+}
+
+.cart-summary p {
+  margin: 0.25rem 0;
+}

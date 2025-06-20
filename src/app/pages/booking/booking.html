@@ -1,14 +1,14 @@
-<main class="booking">
+<main class="booking-container">
   <h2>Book Your Appointment</h2>
 
   <div *ngIf="cart" class="cart-summary">
     <h3>Your Selection</h3>
-    <p><strong>Vehicle:</strong> {{ cart.vehicleType }}</p>
+    <p><strong>Vehicle:</strong> {{ vehicleLabels[cart.vehicleType] }}</p>
     <p *ngIf="cart.service">
-      <strong>Service:</strong> {{ cart.service | titlecase }} – ${{ cart.total }}
+      <strong>Service:</strong> {{ serviceLabels[cart.service] }} – ${{ cart.total }}
     </p>
     <div *ngIf="cart.addOns.length">
-      <p *ngFor="let add of cart.addOns">+ {{ add }}</p>
+      <p *ngFor="let add of cart.addOns">+ {{ addOnNames[add] }}</p>
     </div>
   </div>
 

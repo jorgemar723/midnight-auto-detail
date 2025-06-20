@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CartService, CartData } from '../../cart.service';
+import { CartService, CartData, VEHICLE_TYPE_LABELS, SERVICE_LABELS, ADD_ON_LABELS } from '../../cart.service';
 
 @Component({
   selector: 'app-booking',
@@ -12,6 +12,9 @@ import { CartService, CartData } from '../../cart.service';
 })
 export class BookingComponent implements OnInit {
   cart: CartData | null = null;
+  vehicleLabels = VEHICLE_TYPE_LABELS;
+  serviceLabels = SERVICE_LABELS;
+  addOnNames = ADD_ON_LABELS;
 
   name = '';
   email = '';
