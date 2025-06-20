@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CartService, CartData } from '../../cart.service';
 
 type VehicleType = 'car' | 'smallSUV' | 'largeSUV';
 type ServiceKey = 'exterior' | 'interior' | 'fullDetail';
@@ -29,6 +28,8 @@ export class ServicesComponent {
     petHair: false,
     stainExtractor: false
   };
+
+  constructor(private router: Router) {}
 
   pricing: Record<ServiceKey, ServicePricing> = {
     exterior: {
@@ -76,21 +77,5 @@ export class ServicesComponent {
 
   getCartTotal(): number {
     return this.getServiceTotal() + this.getAddOnTotal();
-  }
-
-  constructor(private router: Router, private cartService: CartService) {}
-
-  continueToBooking(): void {
-    const addOns = Object.keys(this.selectedAddOns).filter(
-      (a) => this.selectedAddOns[a]
-    );
-    const cart: CartData = {
-      vehicleType: this.selectedVehicleType,
-      service: this.selectedService,
-      addOns,
-      total: this.getCartTotal(),
-    };
-    this.cartService.setCart(cart);
-    this.router.navigate(['/booking']);
   }
 }
