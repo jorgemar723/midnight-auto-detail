@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CartService, CartData } from '../../cart.service';
 
 @Component({
   selector: 'app-booking',
@@ -10,6 +11,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./booking.css']
 })
 export class BookingComponent implements OnInit {
+  cart: CartData | null = null;
   name = '';
   email = '';
   phone = '';
@@ -19,7 +21,11 @@ export class BookingComponent implements OnInit {
   color = '';
   notes = '';
 
-  ngOnInit(): void {}
+  constructor(private cartService: CartService) {}
+
+  ngOnInit(): void {
+    this.cart = this.cartService.getCart();
+  }
 
   isFormValid(): boolean {
     return (

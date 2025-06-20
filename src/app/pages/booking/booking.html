@@ -1,5 +1,13 @@
 <main class="booking">
   <h2>Book Your Appointment</h2>
+  <div *ngIf="cart" class="cart-summary">
+    <h3>Your Selection</h3>
+    <p><strong>Vehicle:</strong> {{ cart.vehicleType }}</p>
+    <p *ngIf="cart.service"><strong>Service:</strong> {{ cart.service | titlecase }} - ${{ cart.total }}</p>
+    <div *ngIf="cart.addOns.length">
+      <p *ngFor="let add of cart.addOns">+ {{ add }}</p>
+    </div>
+  </div>
   <form #bookingForm="ngForm" (ngSubmit)="submitForm()">
     <label>Full Name</label>
     <input type="text" placeholder="John Doe" [(ngModel)]="name" name="name" required />
