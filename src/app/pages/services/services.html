@@ -80,13 +80,7 @@
     <div class="addon-checkbox">
       <label>
         <input type="checkbox" [(ngModel)]="selectedAddOns['petHair']" />
-        Pet Hair Removal (+$20)
-      </label>
-    </div>
-    <div class="addon-checkbox">
-      <label>
-        <input type="checkbox" [(ngModel)]="selectedAddOns['stainExtractor']" />
-        Stain Extractor Treatment (+$25)
+        Pet Hair Removal (+$60)
       </label>
     </div>
   </div>
@@ -97,10 +91,7 @@
     <p><strong>Service:</strong> {{ serviceNames[selectedService] }} – ${{ getServiceTotal() }}</p>
 
     <div *ngIf="selectedAddOns['petHair']">
-      <p>+ {{ addOnNames['petHair'] }}: $20</p>
-    </div>
-    <div *ngIf="selectedAddOns['stainExtractor']">
-      <p>+ {{ addOnNames['stainExtractor'] }}: $25</p>
+      <p>+ {{ addOnNames['petHair'] }}: $60</p>
     </div>
 
     <p class="total-line"><strong>Total: ${{ getCartTotal() }}</strong></p>
