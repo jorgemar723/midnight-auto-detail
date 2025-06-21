@@ -44,21 +44,21 @@ export class ServicesComponent {
 
   pricing: Record<ServiceKey, ServicePricing> = {
     exterior: {
-      duration: '1 hr 30 min – 2 hr',
+      duration: '1 hr – 2 hr',
       car: 80,
       smallSUV: 100,
       midsizeSUV: 120,
       largeSUV: 140
     },
     interior: {
-      duration: '1 hr – 1 hr 30 min',
+      duration: '3 hr – 4 hr',
       car: 180,
       smallSUV: 200,
       midsizeSUV: 220,
       largeSUV: 240
     },
     fullDetail: {
-      duration: '2 hr 30 min – 3 hr 30 min',
+      duration: '5 hr – 6 hr',
       car: 240,
       smallSUV: 270,
       midsizeSUV: 300,
