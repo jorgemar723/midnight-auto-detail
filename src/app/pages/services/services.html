@@ -25,7 +25,7 @@
       <div class="details" *ngIf="selectedService === 'exterior'">
         <ul>
           <li>Exterior Hand Wash & Dry</li>
-          <li>Tire and Rim Clean</li>
+          <li>Tire & Rim Clean</li>
           <li>Bug Removal</li>
           <li>Tire Shine</li>
         </ul>
@@ -43,9 +43,11 @@
       <p class="tap-note">Tap to select</p>
       <div class="details" *ngIf="selectedService === 'interior'">
         <ul>
-          <li>Deep cleaning of carpets, seats, and all interior surfaces</li>
-          <li>Dashboard, doors, and console wipedown</li>
-          <li>Vacuuming and optional shampoo</li>
+          <li>Vacuuum Seats, Floors, Trunk Space</li>
+          <li>Clean Glass Inside & Out</li>
+          <li>Clean DoorPockets & Panels</li>
+          <li>Clean Dash & Console</li>
+          <li>Sun Visor Cleanup</li>
         </ul>
         <p><strong>Duration:</strong> {{ getDuration('interior') }}</p>
         <p><strong>Price:</strong> ${{ getPrice('interior') }}</p>
