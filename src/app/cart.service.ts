@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 
-export type VehicleType = 'car' | 'smallSUV' | 'largeSUV';
+export type VehicleType = 'car' | 'smallSUV' | 'midsizeSUV' | 'largeSUV';
 export type ServiceKey = 'exterior' | 'interior' | 'fullDetail';
 export type AddOnKey = 'petHair' | 'stainExtractor';
 
 export const VEHICLE_TYPE_LABELS: Record<VehicleType, string> = {
   car: 'Car / Crossover',
   smallSUV: 'Small SUV / Truck',
+  midsizeSUV: 'Midsize SUV/Truck',
   largeSUV: 'Large SUV / Truck'
 };
 
