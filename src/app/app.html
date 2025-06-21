@@ -1,9 +1,14 @@
 <nav class="navbar" [class.scrolled]="scrolled">
-  <a routerLink="/">Home</a> |
-  <a routerLink="/about">About</a> |
-  <a routerLink="/services">Services</a> |
-  <a routerLink="/gallery">Gallery</a> |
-  <a routerLink="/contact">Contact</a>
+  <a routerLink="/" class="logo-link">
+    <img src="assets/MADLogo.png" alt="Midnight Automotive Mobile Detailing Logo" class="logo" />
+  </a>
+  <div class="nav-links">
+    <a routerLink="/">Home</a> |
+    <a routerLink="/about">About</a> |
+    <a routerLink="/services">Services</a> |
+    <a routerLink="/gallery">Gallery</a> |
+    <a routerLink="/contact">Contact</a>
+  </div>
 </nav>
 
 <router-outlet></router-outlet>
