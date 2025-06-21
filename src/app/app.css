@@ -5,6 +5,7 @@
   padding: 1rem 2rem;
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 1.5rem;
   background-color: transparent;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -25,11 +26,25 @@
 }
 
 .navbar a:hover {
-  color: #00bcd4;
+  color: #ffd700;
 }
 
 /* Active Route Highlight */
 .active-link {
-  color: #00bcd4;
+  color: #ffd700;
   font-weight: bold;
+}
+
+.logo-link {
+  position: absolute;
+  left: 1rem;
+}
+
+.logo {
+  height: 40px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
 }
