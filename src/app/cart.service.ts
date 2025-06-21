@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 export type VehicleType = 'car' | 'smallSUV' | 'midsizeSUV' | 'largeSUV';
 export type ServiceKey = 'exterior' | 'interior' | 'fullDetail';
-export type AddOnKey = 'petHair' | 'stainExtractor';
+export type AddOnKey = 'petHair';
 
 export const VEHICLE_TYPE_LABELS: Record<VehicleType, string> = {
   car: 'Car / Crossover',
@@ -18,8 +18,7 @@ export const SERVICE_LABELS: Record<ServiceKey, string> = {
 };
 
 export const ADD_ON_LABELS: Record<AddOnKey, string> = {
-  petHair: 'Pet Hair Removal',
-  stainExtractor: 'Stain Extractor Treatment'
+  petHair: 'Pet Hair Removal'
 };
 
 export interface CartData {

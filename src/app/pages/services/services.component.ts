@@ -27,8 +27,7 @@ export class ServicesComponent {
   selectedService: ServiceKey | null = null;
 
   selectedAddOns: Record<AddOnKey, boolean> = {
-    petHair: false,
-    stainExtractor: false
+    petHair: false
   };
 
   vehicleTypeLabels: { [key in VehicleType]: CartVehicleType } = {
@@ -82,8 +81,7 @@ export class ServicesComponent {
 
   getAddOnTotal(): number {
     let total = 0;
-    if (this.selectedAddOns['petHair']) total += 20;
-    if (this.selectedAddOns['stainExtractor']) total += 25;
+    if (this.selectedAddOns['petHair']) total += 60;
     return total;
   }
 
