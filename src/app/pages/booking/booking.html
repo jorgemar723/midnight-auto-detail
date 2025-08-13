@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <form #bookingForm="ngForm" (ngSubmit)="submitForm()">
+  <form #bookingForm="ngForm">
     <label>Full Name</label>
     <input
       type="text"
@@ -83,8 +83,23 @@
       name="notes"
     ></textarea>
 
-    <button class="cta-button" type="submit" [disabled]="!isFormValid()">
-      Submit Booking
+    <button
+      class="cta-button"
+      type="button"
+      (click)="sendEmail()"
+      [disabled]="!isFormValid() || submitState === 'sending'"
+    >
+      {{ submitState === 'sending' ? 'Sending…' : 'Submit Booking' }}
     </button>
   </form>
+
+  <div *ngIf="submitState === 'success'" class="success-msg" style="margin-top:12px;">
+    Thank you! We’ll contact you shortly to confirm your appointment.
+    To cancel or reschedule, email us at midnightautodetail@gmail.com.
+    After submitting, we’ll contact you to confirm your appointment time and location.
+  </div>
+
+  <div *ngIf="submitState === 'error'" class="error-msg" style="margin-top:12px;">
+    Sorry, something went wrong sending your request. Please try again in a moment.
+  </div>
 </main>

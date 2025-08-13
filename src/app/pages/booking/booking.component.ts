@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+// Requires: npm install emailjs-com
+// Uses EmailJS IDs from src/environments/environment*.ts
+// Template placeholders: name, email, phone, carDetails, cartDetails, total, submitted_at
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
+import emailjs from 'emailjs-com';
+import { environment } from '../../../environments/environment';
 import { CartService, CartData, VEHICLE_TYPE_LABELS, SERVICE_LABELS, ADD_ON_LABELS } from '../../cart.service';
 
 @Component({
@@ -11,6 +16,8 @@ import { CartService, CartData, VEHICLE_TYPE_LABELS, SERVICE_LABELS, ADD_ON_LABE
   styleUrls: ['./booking.css']
 })
 export class BookingComponent implements OnInit {
+  @ViewChild('bookingForm') bookingForm!: NgForm;
+
   cart: CartData | null = null;
   vehicleLabels = VEHICLE_TYPE_LABELS;
   serviceLabels = SERVICE_LABELS;
@@ -25,10 +32,14 @@ export class BookingComponent implements OnInit {
   color = '';
   notes = '';
 
+  totalPrice = 0;
+  submitState: 'idle' | 'sending' | 'success' | 'error' = 'idle';
+
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
     this.cart = this.cartService.getCart();
+    this.totalPrice = this.cart?.total ?? 0;
   }
 
   isFormValid(): boolean {
@@ -43,22 +54,42 @@ export class BookingComponent implements OnInit {
     );
   }
 
-  submitForm(): void {
-    if (this.isFormValid()) {
-      console.log('Booking submitted:', {
-        name: this.name,
-        email: this.email,
-        phone: this.phone,
-        make: this.make,
-        model: this.model,
-        year: this.year,
-        color: this.color,
-        notes: this.notes,
-        cart: this.cart
-      });
-      alert('Booking submitted!');
-    } else {
-      alert('Please fill out all required fields.');
+  private formatCart(cart: CartData | null): string {
+    if (!cart) return '';
+    const addOn = cart.addOns.includes('petHair') ? ' + Pet Hair Removal' : '';
+    const serviceName = cart.service ? this.serviceLabels[cart.service] : 'Service';
+    const vehicleType = this.vehicleLabels[cart.vehicleType];
+    return `${serviceName} - ${vehicleType}${addOn}`;
+  }
+
+  async sendEmail(): Promise<void> {
+    if (!this.bookingForm?.valid) return;
+
+    this.submitState = 'sending';
+    const v = this.bookingForm.value;
+
+    const templateParams = {
+      name: v.name,
+      email: v.email,
+      phone: v.phone,
+      carDetails: `${v.year} ${v.make} ${v.model} (${v.color})`,
+      cartDetails: this.formatCart(this.cart),
+      total: this.totalPrice,
+      submitted_at: new Date().toLocaleString(),
+    };
+
+    try {
+      await emailjs.send(
+        environment.emailjs.serviceID,
+        environment.emailjs.templateID,
+        templateParams,
+        environment.emailjs.publicKey
+      );
+      this.submitState = 'success';
+      // optional: this.bookingForm.reset();
+    } catch (err) {
+      console.error(err);
+      this.submitState = 'error';
     }
   }
 }
