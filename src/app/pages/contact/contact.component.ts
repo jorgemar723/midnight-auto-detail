@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
+import emailjs from 'emailjs-com';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-contact',
@@ -10,19 +12,41 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./contact.css']
 })
 export class ContactComponent {
+  @ViewChild('contactForm') contactForm!: NgForm;
+
   name = '';
   email = '';
   message = '';
 
-  onSubmit() {
-    console.log('Form submitted:', {
+  submitState: 'idle' | 'sending' | 'success' | 'error' = 'idle';
+
+  async onSubmit(): Promise<void> {
+    if (!this.contactForm?.valid) return;
+
+    this.submitState = 'sending';
+
+    const templateParams = {
       name: this.name,
       email: this.email,
-      message: this.message
-    });
-    alert('Thank you for reaching out! We will get back to you shortly.');
-    this.name = '';
-    this.email = '';
-    this.message = '';
+      message: this.message,
+      submitted_at: new Date().toLocaleString()
+    };
+
+    try {
+      await emailjs.send(
+        environment.emailjs.serviceID,
+        environment.emailjs.contactTemplateID,
+        templateParams,
+        environment.emailjs.publicKey
+      );
+      this.submitState = 'success';
+      // optionally reset the form:
+      // this.contactForm.resetForm();
+      setTimeout(() => (this.submitState = 'idle'), 4000);
+    } catch (err) {
+      console.error(err);
+      this.submitState = 'error';
+    }
   }
 }
+
