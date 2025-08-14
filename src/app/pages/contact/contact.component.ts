@@ -39,13 +39,22 @@ export class ContactComponent {
         templateParams,
         environment.emailjs.publicKey
       );
+
+      // Show success, reset the form, then return to idle after a short delay
       this.submitState = 'success';
-      // optionally reset the form:
-      // this.contactForm.resetForm();
+      this.contactForm.resetForm();
+
+      setTimeout(() => {
+        this.submitState = 'idle';
+      }, 4000);
     } catch (err) {
       console.error(err);
       this.submitState = 'error';
+
+      // Optionally clear the error message after a short delay
+      setTimeout(() => {
+        this.submitState = 'idle';
+      }, 4000);
     }
   }
 }
-

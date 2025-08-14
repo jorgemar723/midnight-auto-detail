@@ -13,16 +13,18 @@
     <textarea id="message" rows="5" required [(ngModel)]="message" name="message"></textarea>
 
     <button type="submit" [disabled]="!contactForm.valid || submitState === 'sending'">
-      {{ submitState === 'sending' ? 'Sending…' : 'Send Message' }}
+      {{ submitState === 'sending'
+          ? 'Sending…'
+          : (submitState === 'success' ? 'Sent!' : 'Send Message') }}
     </button>
   </form>
 
-  <div *ngIf="submitState === 'success'" style="margin-top:12px;">
-    Thanks for reaching out. We’ll get back to you shortly.
+  <!-- Status messages -->
+  <div *ngIf="submitState === 'success'" style="margin-top:12px; color: #22c55e;" aria-live="polite">
+    ✅ Your message was sent successfully! We’ll get back to you shortly.
   </div>
 
-  <div *ngIf="submitState === 'error'" style="margin-top:12px;">
-    Sorry, something went wrong sending your message. Please try again in a moment.
+  <div *ngIf="submitState === 'error'" style="margin-top:12px; color: #ef4444;" aria-live="assertive">
+    ❌ Sorry, something went wrong sending your message. Please try again in a moment.
   </div>
 </section>
-
