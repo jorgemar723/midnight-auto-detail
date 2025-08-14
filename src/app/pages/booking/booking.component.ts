@@ -76,6 +76,7 @@ export class BookingComponent implements OnInit {
       cartDetails: this.formatCart(this.cart),
       total: this.totalPrice,
       submitted_at: new Date().toLocaleString(),
+      notes: v.notes || 'N/A'
     };
 
     try {
